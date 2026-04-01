@@ -9,6 +9,8 @@ const POSSIBLE_WORDS = [
 
 var word = "";
 var guesses = "";
+ var guesscount;
+ const MAX_GUESSES = 6;
 
 let newGame = function() {
     let randomIndex = parseInt(Math.random() * POSSIBLE_WORDS.length);
@@ -36,11 +38,21 @@ let updatePage = function() {
 
     let guessArea = document.getElementById("guesses");
     guessArea.textContent = "Guesses: " + guesses;
+
+let image = document.getElementById("hangmanpic");
+    image.src = `images/hangman${guesscount}.gif`;
+
 }
 
 let guessLetter = function() {
     let input = document.getElementById("guess");
     let letter = input.value;
+    letter = letter.toLowerCase();
+
+    if (word.indexOf(letter) < 0) {
+        guesscount--;
+    }
+
     guesses += letter;
     updatePage();
 }
