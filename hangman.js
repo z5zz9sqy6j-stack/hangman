@@ -77,7 +77,11 @@ let guessLetter = function() {
         input.value = "";
         return;
     }
-
+    if (word === "") {
+        alert("Please click New Game first.");
+        input.value = "";
+        return;
+    }
     if (gameOver()) {
         alert("The game is finished.");
         input.value = "";
