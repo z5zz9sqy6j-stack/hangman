@@ -88,6 +88,12 @@ let guessLetter = function() {
         return;
     }
 
+     if (guesses.indexOf(letter) >= 0) {
+        alert("You already guessed that letter.");
+        input.value = "";
+        return;
+    }
+
     if (word.indexOf(letter) < 0) {
         guesscount--;
     }
