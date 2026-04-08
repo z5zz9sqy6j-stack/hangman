@@ -72,6 +72,12 @@ let guessLetter = function() {
     let letter = input.value;
     letter = letter.toLowerCase();
 
+        if (letter === "") {
+        alert("Please enter a letter.");
+        input.value = "";
+        return;
+    }
+
     if (gameOver()) {
         alert("The game is finished.");
         input.value = "";
