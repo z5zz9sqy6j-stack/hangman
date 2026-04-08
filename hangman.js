@@ -65,7 +65,7 @@ let updatePage = function() {
     let clue = document.getElementById("clue");
     clue.textContent = clueString;
 
-        let guessArea = document.getElementById("guesses");
+                let guessArea = document.getElementById("guesses");
 
     if (isWordGuessed()) {
         guessArea.textContent = "Guesses: " + guesses + " - You win!";
@@ -76,10 +76,6 @@ let updatePage = function() {
     else {
         guessArea.textContent = "Guesses: " + guesses;
     }
-
-let image = document.getElementById("hangmanpic");
-    image.src = `images/hangman${guesscount}.gif`;
-
 }
 
 let guessLetter = function() {
