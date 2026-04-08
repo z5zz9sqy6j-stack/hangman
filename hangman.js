@@ -31,9 +31,11 @@ let isWordGuessed = function() {
 
     return true;
 }
+
 let gameOver = function() {
     return guesscount <= 0 || isWordGuessed();
 }
+
 let updatePage = function() {
     let clueString = "";
 
@@ -72,23 +74,25 @@ let guessLetter = function() {
     let letter = input.value;
     letter = letter.toLowerCase();
 
-        if (letter === "") {
-        alert("Please enter a letter.");
-        input.value = "";
-        return;
-    }
     if (word === "") {
         alert("Please click New Game first.");
         input.value = "";
         return;
     }
+
+    if (letter === "") {
+        alert("Please enter a letter.");
+        input.value = "";
+        return;
+    }
+
     if (gameOver()) {
         alert("The game is finished.");
         input.value = "";
         return;
     }
 
-     if (guesses.indexOf(letter) >= 0) {
+    if (guesses.indexOf(letter) >= 0) {
         alert("You already guessed that letter.");
         input.value = "";
         return;
