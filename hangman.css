@@ -1,0 +1,34 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 30px;
+}
+
+#clue {
+    font-size: 24px;
+    letter-spacing: 5px;
+    margin: 20px;
+}
+
+#guesses {
+    margin-top: 15px;
+    font-size: 18px;
+}
+
+#guess {
+    font-size: 18px;
+    padding: 5px;
+    text-align: center;
+}
+
+button {
+    font-size: 16px;
+    padding: 5px 10px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+#hangmanpic {
+    width: 200px;
+    margin-bottom: 20px;
+}
