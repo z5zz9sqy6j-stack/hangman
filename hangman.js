@@ -7,20 +7,49 @@ const POSSIBLE_WORDS = [
     "toady"
 ];
 
-var word = "";
 var guesses = "";
- var guesscount;
- const MAX_GUESSES = 6;
+var guesscount;
+const MAX_GUESSES = 6;
 
 let newGame = function() {
     let randomIndex = parseInt(Math.random() * POSSIBLE_WORDS.length);
     word = POSSIBLE_WORDS[randomIndex];
     guesses = "";
+    guesscount = MAX_GUESSES;
     updatePage();
 }
 
+let isWordGuessed = function() {
+    for (let i = 0; i < word.length; i++) {
+        let currentLetter = word.charAt(i);
+
+        if (guesses.indexOf(currentLetter) < 0) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+let gameOver = function() {
+    return guesscount <= 0 || isWordGuessed();
+}
+
+
 let updatePage = function() {
     let clueString = "";
+
+    if (word === "") {
+        let clue = document.getElementById("clue");
+        clue.textContent = "Press New Game to Play!";
+
+        let guessArea = document.getElementById("guesses");
+        guessArea.textContent = "Guesses: ";
+
+        let image = document.getElementById("hangmanpic");
+        image.src = "images/hangman6.gif";
+        return;
+    }
 
     for (let i = 0; i < word.length; i++) {
         var currentLetter = word.charAt(i);
@@ -36,8 +65,17 @@ let updatePage = function() {
     let clue = document.getElementById("clue");
     clue.textContent = clueString;
 
-    let guessArea = document.getElementById("guesses");
-    guessArea.textContent = "Guesses: " + guesses;
+        let guessArea = document.getElementById("guesses");
+
+    if (isWordGuessed()) {
+        guessArea.textContent = "Guesses: " + guesses + " - You win!";
+    }
+    else if (guesscount <= 0) {
+        guessArea.textContent = "Guesses: " + guesses + " - You lose! The word was: " + word;
+    }
+    else {
+        guessArea.textContent = "Guesses: " + guesses;
+    }
 
 let image = document.getElementById("hangmanpic");
     image.src = `images/hangman${guesscount}.gif`;
@@ -48,6 +86,30 @@ let guessLetter = function() {
     let input = document.getElementById("guess");
     let letter = input.value;
     letter = letter.toLowerCase();
+
+    if (word === "") {
+        alert("Please click New Game first.");
+        input.value = "";
+        return;
+    }
+
+    if (gameOver()) {
+        alert("The game is finished.");
+        input.value = "";
+        return;
+    }
+
+    if (letter === "") {
+        alert("Please enter a letter.");
+        input.value = "";
+        return;
+    }
+
+    if (guesses.indexOf(letter) >= 0) {
+        alert("You already guessed that letter.");
+        input.value = "";
+        return;
+    }
 
     if (word.indexOf(letter) < 0) {
         guesscount--;
